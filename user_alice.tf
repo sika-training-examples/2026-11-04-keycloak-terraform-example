@@ -17,3 +17,13 @@ resource "keycloak_user" "alice" {
     temporary = true
   }
 }
+
+resource "keycloak_user_groups" "alice" {
+  realm_id = keycloak_realm.example.id
+  user_id  = keycloak_user.alice.id
+
+  group_ids = [
+    keycloak_group.team-a.id,
+    keycloak_group.team-b.id,
+  ]
+}

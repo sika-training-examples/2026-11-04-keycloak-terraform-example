@@ -18,6 +18,15 @@ resource "keycloak_user" "bob" {
   }
 }
 
+resource "keycloak_user_groups" "bob" {
+  realm_id = keycloak_realm.example.id
+  user_id  = keycloak_user.bob.id
+
+  group_ids = [
+    keycloak_group.team-a.id,
+  ]
+}
+
 resource "keycloak_user_roles" "bob" {
   realm_id = keycloak_realm.example.id
   user_id  = keycloak_user.bob.id

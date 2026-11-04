@@ -18,6 +18,15 @@ resource "keycloak_user" "charlie" {
   }
 }
 
+resource "keycloak_user_groups" "charlie" {
+  realm_id = keycloak_realm.example.id
+  user_id  = keycloak_user.charlie.id
+
+  group_ids = [
+    keycloak_group.team-b.id,
+  ]
+}
+
 resource "keycloak_user_roles" "charlie" {
   realm_id = keycloak_realm.example.id
   user_id  = keycloak_user.charlie.id
