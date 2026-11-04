@@ -10,3 +10,21 @@ resource "keycloak_openid_client" "example_public" {
   valid_post_logout_redirect_uris = ["*"]
   web_origins                     = ["*"]
 }
+
+
+resource "keycloak_openid_client_default_scopes" "example_public" {
+  realm_id  = keycloak_realm.example.id
+  client_id = keycloak_openid_client.example_public.id
+  default_scopes = [
+    "profile",
+    "email",
+    keycloak_openid_client_scope.example_groups.name,
+  ]
+}
+
+resource "keycloak_openid_client_optional_scopes" "example_public" {
+  realm_id  = keycloak_realm.example.id
+  client_id = keycloak_openid_client.example_public.id
+
+  optional_scopes = []
+}
