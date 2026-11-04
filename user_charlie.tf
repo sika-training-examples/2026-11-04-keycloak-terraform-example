@@ -1,6 +1,6 @@
 resource "keycloak_user" "charlie" {
   lifecycle {
-    ignore_changes = [ required_actions ]
+    ignore_changes = [ required_actions, federated_identity ]
   }
 
   realm_id = keycloak_realm.example.id
