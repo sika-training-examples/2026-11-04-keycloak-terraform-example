@@ -24,6 +24,7 @@ resource "keycloak_user_groups" "charlie" {
 
   group_ids = [
     keycloak_group.team-b.id,
+    keycloak_group.viewers.id,
   ]
 }
 

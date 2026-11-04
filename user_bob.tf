@@ -25,6 +25,9 @@ resource "keycloak_user_groups" "bob" {
   group_ids = [
     keycloak_group.team-a.id,
     keycloak_group.grafana-admin.id,
+    keycloak_group.argocd-readonly.id,
+    keycloak_group.editors.id,
+    keycloak_group.viewers.id,
   ]
 }
 

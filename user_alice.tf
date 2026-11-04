@@ -26,5 +26,9 @@ resource "keycloak_user_groups" "alice" {
     keycloak_group.team-a.id,
     keycloak_group.team-b.id,
     keycloak_group.grafana-admin.id,
+    keycloak_group.argocd-admin.id,
+    keycloak_group.admins.id,
+    keycloak_group.editors.id,
+    keycloak_group.viewers.id,
   ]
 }
