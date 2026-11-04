@@ -9,6 +9,7 @@ resource "keycloak_authentication_execution" "browser_otp_cookie" {
   parent_flow_alias = keycloak_authentication_flow.browser_otp.alias
   authenticator     = "auth-cookie"
   requirement       = "ALTERNATIVE"
+  priority          = 10
 }
 
 resource "keycloak_authentication_execution" "browser_otp_idp_redirector" {
@@ -16,6 +17,7 @@ resource "keycloak_authentication_execution" "browser_otp_idp_redirector" {
   parent_flow_alias = keycloak_authentication_flow.browser_otp.alias
   authenticator     = "identity-provider-redirector"
   requirement       = "ALTERNATIVE"
+  priority          = 20
 
   depends_on = [
     keycloak_authentication_execution.browser_otp_cookie,
@@ -28,6 +30,7 @@ resource "keycloak_authentication_subflow" "browser_otp_forms" {
   alias             = "browser-otp-forms"
   provider_id       = "basic-flow"
   requirement       = "ALTERNATIVE"
+  priority          = 30
 
   depends_on = [
     keycloak_authentication_execution.browser_otp_idp_redirector,
@@ -39,6 +42,7 @@ resource "keycloak_authentication_execution" "browser_otp_username_password" {
   parent_flow_alias = keycloak_authentication_subflow.browser_otp_forms.alias
   authenticator     = "auth-username-password-form"
   requirement       = "REQUIRED"
+  priority          = 10
 }
 
 resource "keycloak_authentication_execution" "browser_otp_otp" {
@@ -46,6 +50,7 @@ resource "keycloak_authentication_execution" "browser_otp_otp" {
   parent_flow_alias = keycloak_authentication_subflow.browser_otp_forms.alias
   authenticator     = "auth-otp-form"
   requirement       = "REQUIRED"
+  priority          = 20
 
   depends_on = [
     keycloak_authentication_execution.browser_otp_username_password,
