@@ -25,5 +25,6 @@ resource "keycloak_user_groups" "alice" {
   group_ids = [
     keycloak_group.team-a.id,
     keycloak_group.team-b.id,
+    keycloak_group.grafana-admin.id,
   ]
 }
