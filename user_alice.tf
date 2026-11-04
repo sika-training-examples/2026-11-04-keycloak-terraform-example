@@ -1,4 +1,8 @@
 resource "keycloak_user" "alice" {
+  lifecycle {
+    ignore_changes = [ required_actions ]
+  }
+
   realm_id = keycloak_realm.example.id
   username = "alice"
   enabled  = true
